@@ -267,7 +267,7 @@ footer {
         margin-left: 0px;
         padding-left: 0px;
         margin: 0 auto;
-        width: 440px;
+        width: 460px;
 
         li {
             margin: 0 auto;
@@ -277,29 +277,63 @@ footer {
         }
 
         a {
+            font-family: arial, sans-serif;
             text-decoration: none;
+            padding: 0px 5px 5px 5px;
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius: 3px;
 
+            -moz-transition-property: background-color, color;
+            -o-transition-property: background-color, color;
+            -ms-transition-property: background-color, color;
+            -webkit-transition-property: background-color, color;
+            transition-property: background-color, color;
+            -moz-transition-duration: 0.5s, 0.5s;
+            -moz-transition-timing-function: ease-out, ease-out;  /* Saf3.2+, Chrome */
+            -o-transition-duration: 0.5s, 0.5s;
+            -o-transition-timing-function: ease-out, ease-out;  /* Saf3.2+, Chrome */
+            -ms-transition-duration: 0.5s, 0.5s;
+            -ms-transition-timing-function: ease-out, ease-out;  /* Saf3.2+, Chrome */
+            -webkit-transition-duration: 0.5s, 0.5s;
+            -webkit-transition-timing-function: ease-out, ease-out;  /* Saf3.2+, Chrome */
+            transition-duration: 0.5s, 0.5s;
+            transition-timing-function: ease-out, ease-out;  /* Saf3.2+, Chrome */
             &:hover {
-                text-decoration: underline;
+                /*text-decoration: underline;*/
             }
         }
 
         a.twitter {
-            color: #33ccff;
+            color: #66D9FF;
             background: url('../img/twitter_newbird_blue-30.png') 0px -3px no-repeat;
             padding-left: 30px;
+
+           &:hover {
+                background-color: #66D9FF;
+                color: #fff;
+           }
         }
 
         a.facebook {
-            color: #3b5998;
+            color: #3958C6;
             background: url('../img/facebook-30.png') 0px -2px no-repeat;
             padding-left: 30px;
+            &:hover {
+                background-color: #3958C6;
+                color: #fff;
+            }
         }
 
         a.flickr {
-            color: #0063dc;
+            color: #1F84FF;
             background: url('../img/flickr-30.png') 0px -5px no-repeat;
+            padding: 0px 5px 5px 5px;
             padding-left: 30px;
+            &:hover {
+                background-color: #1F84FF;
+                color: #fff;
+            }
         }
 
     }
@@ -383,7 +417,7 @@ footer {
     }
 
     footer ul {
-        width: 350px !important;
+        width: 360px !important;
     }
 
 }
