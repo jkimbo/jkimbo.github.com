@@ -220,10 +220,12 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 header {
     margin: 0 auto;
-    margin-top: 5%;
+    margin-top: 12%;
+    margin-bottom: 5%;
     width: 100%;
+    position: relative;
 
-    h1 {
+    #header {
         font-family: 'Unna', serif;
         text-shadow: 0 0 1px #BEBEBE; /* To remove pixelation on google font */
         font-weight: normal;
@@ -235,6 +237,28 @@ header {
         font-size: 500px;
     }
 
+    #reload {
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        background: url('../img/playback_reload_icon&32.png') 0 0  no-repeat;
+        top: -25px;
+        right: -25px;
+        opacity: 0.2;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+#main {
+    #info {
+        font-style: italic;
+        color: gray;
+        margin: 0px;
+        margin-bottom: 5%;
+    }
 }
 
 footer {
@@ -328,8 +352,16 @@ footer {
    ========================================================================== */
 
 @media screen and (max-width:480px) {
+    #reload {
+        background: url('../img/playback_reload_icon&16.png') 0 0  no-repeat !important;
+    }
+
     p, ul a {
         font-size: 1.4em;
+    }
+
+    #info {
+        font-size: 0.7em;
     }
 
     footer ul {
@@ -338,8 +370,16 @@ footer {
 }
 
 @media screen and (min-width: 480px) and (max-width:1199px) {
+    #reload {
+        background: url('../img/playback_reload_icon&24.png') 0 0  no-repeat !important;
+    }
+
     p, ul a {
         font-size: 1.4em;
+    }
+
+    #info {
+        font-size: 1.0em;
     }
 
     footer ul {
@@ -352,6 +392,10 @@ footer {
 @media screen and (min-width: 1200px) {
     p, ul a {
         font-size: 2em;
+    }
+
+    #info {
+        font-size: 1.3em;
     }
 
     ul a {
