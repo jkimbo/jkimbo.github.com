@@ -6,3 +6,8 @@ Warning: this it my own personal version of the HTML5 Boilderplate and so will a
 
 ### [960.gs](http://960.gs)
 ### [Less](http://lesscss.org)
+
+## Issues:
+
+The build script doesn't work because it does not have support for less. I hope to fix this in the near future
+
