@@ -239,11 +239,11 @@
 
     <!-- Target: basics -->
     <target name="-basics.dev"
-            depends="-rev,
+            depends="-intro,
                      -copy"/>
 
     <target name="-basics.test"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -254,7 +254,7 @@
                      -copy"/>
 
     <target name="-basics.production"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -266,11 +266,11 @@
 
     <!-- Target: text -->
     <target name="-text.dev"
-            depends="-rev,
+            depends="-intro,
                      -copy"/>
 
     <target name="-text.test"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -282,7 +282,7 @@
                      -copy"/>
 
     <target name="-text.production"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -295,13 +295,13 @@
 
     <!-- Target: buildkit -->
     <target name="-buildkit.dev"
-            depends="-rev,
+            depends="-intro,
                      -imagespng,
                      -imagesjpg,
                      -copy"/>
 
     <target name="-buildkit.test"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -315,7 +315,7 @@
                      -copy"/>
 
     <target name="-buildkit.production"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -330,13 +330,13 @@
 
     <!-- Target: build -->
     <target name="-build.dev"
-            depends="-rev,
+            depends="-intro,
                      -imagespng,
                      -imagesjpg,
                      -copy"/>
 
     <target name="-build.test"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -350,7 +350,7 @@
                      -copy"/>
 
     <target name="-build.production"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -365,13 +365,13 @@
 
     <!-- Target: minify -->
     <target name="-minify.dev"
-            depends="-rev,
+            depends="-intro,
                      -imagespng,
                      -imagesjpg,
                      -copy"/>
 
     <target name="-minify.test"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -385,7 +385,7 @@
                      -copy"/>
 
     <target name="-minify.production"
-            depends="-rev,
+            depends="-intro,
                      -usemin,
                      -js.all.minify,
                      -js.main.concat,
@@ -412,7 +412,7 @@
     </target>
 
 
-    <target name="-rev" description="(PRIVATE) Increase the current build number by one and set build date">
+    <target name="-intro" description="(PRIVATE) Kindly inform the developer about the impending magic">
     <!-- This is a private target -->
 
         <echo message="====================================================================="/>
@@ -486,7 +486,7 @@
         <concat destfile="./${dir.intermediate}/${dir.js}/scripts-concat.js" overwrite="no">
             <fileset dir="./${dir.intermediate}/">
                 <include name="${dir.js.main}/plugins.js"/>
-                <include name="${dir.js.main}/script.js"/>
+                <include name="${dir.js.main}/${file.root.script}"/>
             </fileset>
         </concat>
     </target>
@@ -515,8 +515,8 @@
             </fileset>
         </concat>
 
-        <checksum file="${dir.intermediate}/${dir.js}/scripts-concat.min.js" algorithm="sha" property="scripts.sha" />
-
+        <checksum file="${dir.intermediate}/${dir.js}/scripts-concat.min.js" algorithm="sha" property="scripts.fullsha" />
+        <propertyregex property="scripts.sha" input="${scripts.fullsha}" regexp=".{${hash.length}}" select="\0" />
         <property name="scripts.js" value="${dir.js}/${scripts.sha}.js" />
         <copy file="${dir.intermediate}/${dir.js}/scripts-concat.min.js" tofile="${dir.publish}/${dir.js}/${scripts.sha}.js" />
     </target>
@@ -533,11 +533,14 @@
                 <exclude name="${dir.js}/**/*.min.js"/>
             </fileset>
             <arg line="-jar"/>
-            <arg path="./${dir.build.tools}/${tool.yuicompressor}"/>
-            <srcfile/>
-            <arg line="--line-break"/>
-            <arg line="4000"/>
-            <arg line="-o"/>
+            <arg path="./${dir.build.tools}/closure-compiler-v1346.jar"/>
+            <arg line="--js"/>
+			<srcfile/>
+			<arg line="--compilation_level" />
+			 <arg value="${scripts.compilation.level}" />
+			 <arg line="--warning_level" /> 
+			 <arg value="${scripts.compilation.warninglevel}" />
+			 <arg line="--js_output_file" />
             <mapper type="glob" from="*.js" to="${basedir}/${dir.intermediate}/*.js"/>
             <targetfile/>
         </apply>
@@ -552,7 +555,7 @@
               <exclude name="${dir.js}/mylibs-concat.js"/>
               <exclude name="${dir.js}/scripts-concat.min.js"/>
               <exclude name="${dir.js}/plugins.js"/>
-              <exclude name="${dir.js}/script.js"/>
+              <exclude name="${dir.js}/${file.root.script}"/>
           </fileset>
         </copy>
         <copy todir="${dir.publish}/${dir.js.mylibs}/">
@@ -609,14 +612,15 @@
 
         <echo message="Update the HTML to reference our concatenated script file: ${scripts.js}"/>
         <!-- style.css replacement handled as a replacetoken above -->
-        <replaceregexp match="&lt;!-- scripts concatenated [\d\w\s\W]*?!-- end ((scripts)|(concatenated and minified scripts))\s?--&gt;" replace="&lt;script defer src='${scripts.js}\'&gt;&lt;/script&gt;" flags="m">
+        <replaceregexp match="&lt;!-- scripts concatenated [\d\w\s\W]*&lt;script.*src=['&quot;]?(.*)/${file.root.script}(?:\?.*)?['&quot;]?\s*&gt;\s*&lt;/script&gt;[\d\w\s\W]*&lt;!-- end ((scripts)|(concatenated and minified scripts))\s*--&gt;" 
+        	replace="&lt;script defer src='\1/${scripts.sha}.js\'&gt;&lt;/script&gt;" flags="m">
             <fileset dir="${dir.intermediate}" includes="${page-files}"/>
         </replaceregexp>
         <!--[! use comments like this one to avoid having them get minified -->
 
         <echo message="Updating the HTML with the new css filename: ${style.css}"/>
 
-        <replaceregexp match="&lt;link rel=['&quot;]?stylesheet['&quot;]?\s+href=['&quot;]?(.*)/style.css(?:\?.*)?['&quot;]?\s*&gt;" 
+        <replaceregexp match="&lt;link rel=['&quot;]?stylesheet['&quot;]?\s+href=['&quot;]?(.*)/${file.root.stylesheet}(?:\?.*)?['&quot;]?\s*&gt;" 
         	replace="&lt;link rel='stylesheet' href='\1/${css.sha}.css'&gt;" flags="m">
             <fileset dir="${dir.intermediate}" includes="${page-files}"/>
         </replaceregexp>
@@ -893,7 +897,8 @@
             <targetfile/>
         </apply>
 
-        <checksum file="${dir.intermediate}/${dir.css}/style-concat.min.css" algorithm="sha" property="css.sha" />
+        <checksum file="${dir.intermediate}/${dir.css}/style-concat.min.css" algorithm="sha" property="css.fullsha" />
+        <propertyregex property="css.sha" input="${css.fullsha}" regexp=".{${hash.length}}" select="\0" />
         <property name="style.css" value="${dir.css}/${css.sha}.css" />
         <copy file="${dir.intermediate}/${dir.css}/style-concat.min.css" tofile="${dir.publish}/${dir.css}/${css.sha}.css" />
 
