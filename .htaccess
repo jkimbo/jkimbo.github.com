@@ -56,20 +56,11 @@
 # Alternatively you could only whitelist your
 # subdomains like "subdomain.example.com".
 
-<<<<<<< HEAD
 <IfModule mod_headers.c>
   <FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
-=======
-<FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css)$">
-  <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-  </IfModule>
-</FilesMatch>
->>>>>>> parent of 5723d34... Some small tweaks
-
 
 
 # ----------------------------------------------------------------------
@@ -241,11 +232,7 @@ AddType text/x-vcard                   vcf
   ExpiresByType text/x-component          "access plus 1 month"
 
 # Webfonts
-<<<<<<< HEAD
   ExpiresByType application/x-font-ttf    "access plus 1 month"
-=======
-  ExpiresByType font/truetype             "access plus 1 month"
->>>>>>> parent of 5723d34... Some small tweaks
   ExpiresByType font/opentype             "access plus 1 month"
   ExpiresByType application/x-font-woff   "access plus 1 month"
   ExpiresByType image/svg+xml             "access plus 1 month"
