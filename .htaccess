@@ -56,11 +56,19 @@
 # Alternatively you could only whitelist your
 # subdomains like "subdomain.example.com".
 
+<<<<<<< HEAD
 <IfModule mod_headers.c>
   <FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
+=======
+<FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css)$">
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+  </IfModule>
+</FilesMatch>
+>>>>>>> parent of 5723d34... Some small tweaks
 
 
 
@@ -72,38 +80,38 @@
 # JavaScript
 #   Normalize to standard type (it's sniffed in IE anyways)
 #   tools.ietf.org/html/rfc4329#section-7.2
-    AddType application/javascript         js
+AddType application/javascript         js
 
 # Audio
-    AddType audio/ogg                      oga ogg
-    AddType audio/mp4                      m4a
+AddType audio/ogg                      oga ogg
+AddType audio/mp4                      m4a
 
 # Video
-    AddType video/ogg                      ogv
-    AddType video/mp4                      mp4 m4v
-    AddType video/webm                     webm
+AddType video/ogg                      ogv
+AddType video/mp4                      mp4 m4v
+AddType video/webm                     webm
 
 # SVG.
 #   Required for svg webfonts on iPad
 #   twitter.com/FontSquirrel/status/14855840545
-    AddType     image/svg+xml              svg svgz
-    AddEncoding gzip                       svgz
+AddType     image/svg+xml              svg svgz
+AddEncoding gzip                       svgz
 
 # Webfonts
-    AddType application/vnd.ms-fontobject  eot
-    AddType application/x-font-ttf    ttf ttc
-    AddType font/opentype                  otf
-    AddType application/x-font-woff        woff
+AddType application/vnd.ms-fontobject  eot
+AddType application/x-font-ttf    ttf ttc
+AddType font/opentype                  otf
+AddType application/x-font-woff        woff
 
 # Assorted types
-    AddType image/x-icon                   ico
-    AddType image/webp                     webp
-    AddType text/cache-manifest            appcache manifest
-    AddType text/x-component               htc
-    AddType application/x-chrome-extension crx
-    AddType application/x-xpinstall        xpi
-    AddType application/octet-stream       safariextz
-    AddType text/x-vcard                   vcf
+AddType image/x-icon                   ico
+AddType image/webp                     webp
+AddType text/cache-manifest            appcache manifest
+AddType text/x-component               htc
+AddType application/x-chrome-extension crx
+AddType application/x-xpinstall        xpi
+AddType application/octet-stream       safariextz
+AddType text/x-vcard                   vcf
 
 
 
@@ -141,33 +149,33 @@
 
 # Force deflate for mangled headers developer.yahoo.com/blogs/ydn/posts/2010/12/pushing-beyond-gzipping/
     <IfModule mod_setenvif.c>
-        <IfModule mod_headers.c>
-            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
-            RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
-        </IfModule>
+      <IfModule mod_headers.c>
+        SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+        RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+      </IfModule>
     </IfModule>
 
 # HTML, TXT, CSS, JavaScript, JSON, XML, HTC:
     <IfModule filter_module>
-          FilterDeclare   COMPRESS
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/html
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/css
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/plain
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/xml
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/x-component
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/javascript
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/json
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xml
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xhtml+xml
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/rss+xml
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/atom+xml
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/vnd.ms-fontobject
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/svg+xml
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/x-icon
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/x-font-ttf
-          FilterProvider  COMPRESS  DEFLATE resp=Content-Type $font/opentype
-          FilterChain     COMPRESS
-          FilterProtocol  COMPRESS  DEFLATE change=yes;byteranges=no
+      FilterDeclare   COMPRESS
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/html
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/css
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/plain
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/xml
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $text/x-component
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/javascript
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/json
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xml
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/xhtml+xml
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/rss+xml
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/atom+xml
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/vnd.ms-fontobject
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/svg+xml
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $image/x-icon
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $application/x-font-ttf
+      FilterProvider  COMPRESS  DEFLATE resp=Content-Type $font/opentype
+      FilterChain     COMPRESS
+      FilterProtocol  COMPRESS  DEFLATE change=yes;byteranges=no
     </IfModule>
 
     <IfModule !mod_filter.c>
@@ -205,47 +213,51 @@
     ExpiresByType text/cache-manifest       "access plus 0 seconds"
 
 # Your document html
-    ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType text/html                 "access plus 0 seconds"
 
 # Data
-    ExpiresByType text/xml                  "access plus 0 seconds"
-    ExpiresByType application/xml           "access plus 0 seconds"
-    ExpiresByType application/json          "access plus 0 seconds"
+  ExpiresByType text/xml                  "access plus 0 seconds"
+  ExpiresByType application/xml           "access plus 0 seconds"
+  ExpiresByType application/json          "access plus 0 seconds"
 
 # Feed
-    ExpiresByType application/rss+xml       "access plus 1 hour"
-    ExpiresByType application/atom+xml      "access plus 1 hour"
+  ExpiresByType application/rss+xml       "access plus 1 hour"
+  ExpiresByType application/atom+xml      "access plus 1 hour"
 
 # Favicon (cannot be renamed)
-    ExpiresByType image/x-icon              "access plus 1 week"
+  ExpiresByType image/x-icon              "access plus 1 week"
 
 # Media: images, video, audio
-    ExpiresByType image/gif                 "access plus 1 month"
-    ExpiresByType image/png                 "access plus 1 month"
-    ExpiresByType image/jpg                 "access plus 1 month"
-    ExpiresByType image/jpeg                "access plus 1 month"
-    ExpiresByType video/ogg                 "access plus 1 month"
-    ExpiresByType audio/ogg                 "access plus 1 month"
-    ExpiresByType video/mp4                 "access plus 1 month"
-    ExpiresByType video/webm                "access plus 1 month"
+  ExpiresByType image/gif                 "access plus 1 month"
+  ExpiresByType image/png                 "access plus 1 month"
+  ExpiresByType image/jpg                 "access plus 1 month"
+  ExpiresByType image/jpeg                "access plus 1 month"
+  ExpiresByType video/ogg                 "access plus 1 month"
+  ExpiresByType audio/ogg                 "access plus 1 month"
+  ExpiresByType video/mp4                 "access plus 1 month"
+  ExpiresByType video/webm                "access plus 1 month"
 
 # HTC files  (css3pie)
-    ExpiresByType text/x-component          "access plus 1 month"
+  ExpiresByType text/x-component          "access plus 1 month"
 
 # Webfonts
+<<<<<<< HEAD
   ExpiresByType application/x-font-ttf    "access plus 1 month"
+=======
+  ExpiresByType font/truetype             "access plus 1 month"
+>>>>>>> parent of 5723d34... Some small tweaks
   ExpiresByType font/opentype             "access plus 1 month"
   ExpiresByType application/x-font-woff   "access plus 1 month"
   ExpiresByType image/svg+xml             "access plus 1 month"
   ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
 
 # CSS and JavaScript
-    ExpiresByType text/css                  "access plus 1 year"
-    ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
 
-    <IfModule mod_headers.c>
-        Header append Cache-Control "public"
-    </IfModule>
+  <IfModule mod_headers.c>
+    Header append Cache-Control "public"
+  </IfModule>
 
 </IfModule>
 
@@ -330,9 +342,9 @@
 # Rewrite "www.example.com -> example.com"
 
 <IfModule mod_rewrite.c>
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
 </IfModule>
 
 # ----------------------------------------------------------------------
@@ -431,15 +443,15 @@ AddCharset utf-8 .html .css .js .xml .json .rss .atom
 # Usually you should leave this activated, because you shouldn't allow everybody to surf through
 # every folder on your server (which includes rather private places like CMS system folders).
 <IfModule mod_autoindex.c>
-    Options -Indexes
+  Options -Indexes
 </IfModule>
 
 
 # Block access to "hidden" directories whose names begin with a period. This
 # includes directories used by version control systems such as Subversion or Git.
-<IfModule mod_rewrite.c>
-    RewriteRule "(^|/)\." - [F]
-</IfModule>
+#<IfModule mod_rewrite.c>
+  #RewriteRule "(^|/)\." - [F]
+#</IfModule>
 
 
 # If your server is not already configured as such, the following directive
