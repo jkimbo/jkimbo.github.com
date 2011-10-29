@@ -158,17 +158,23 @@ button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: ba
 
 /*
  * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
+ * 2. Correct inner spacing displayed oddly in IE6/7
  */
 
-button, input { line-height: normal; }
+button, input { line-height: normal; *overflow: visible; }
+
+/*
+ * Reintroduce inner spacing in 'table' to avoid overlap and whitespace issues in IE6/7
+ */
+
+table button, table input { *overflow: auto; }
 
 /*
  * 1. Display hand cursor for clickable form elements
  * 2. Allow styling of clickable form elements in iOS
- * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
  */
 
-button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; *overflow: visible; }
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
 
 /*
  * Consistent box sizing and appearance
@@ -208,7 +214,7 @@ td { vertical-align: top; }
    Author: J.Kim
    ========================================================================== */
 
-#container {
+.container {
     width: 84%;
     max-width: 1500px;
     margin: 0 auto;
@@ -258,6 +264,7 @@ header {
 }
 
 footer {
+    padding-bottom: 20px;
     ul {
         list-style-type: none;
         margin-left: 0px;
@@ -305,11 +312,10 @@ footer {
             background: url('../img/twitter_newbird_blue-30.png') 0px -1px no-repeat;
             padding-left: 30px;
             padding-top: 3px;
-
-           &:hover {
+            &:hover {
                 background-color: #66D9FF;
                 color: #fff;
-           }
+            }
         }
 
         a.facebook {
@@ -334,17 +340,37 @@ footer {
                 color: #fff;
             }
         }
-
     }
 }
 
 .clear {
-  clear: both;
-  display: block;
-  overflow: hidden;
-  visibility: hidden;
-  width: 0;
-  height: 0;
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+/* 404 page styles */
+#error {
+    header {
+        #header {
+            text-shadow: 0 0 1px #E46767;
+            color: #E46767;
+        }
+    }
+    #info {
+        font-size: 18px;
+        a {
+            text-decoration: none;
+            color: #222;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
 }
 
 /* ==|== non-semantic helper classes ========================================
@@ -370,7 +396,7 @@ footer {
 /* Contain floats: h5bp.com/q */
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
-.clearfix { *zoom: 1; }
+.clearfix { zoom: 1; }
 
 
 
@@ -439,7 +465,7 @@ footer {
    ========================================================================== */
 
 @media print {
-  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
+  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
   a, a:visited { text-decoration: underline; }
   a[href]:after { content: " (" attr(href) ")"; }
   abbr[title]:after { content: " (" attr(title) ")"; }
