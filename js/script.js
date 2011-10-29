@@ -77,7 +77,7 @@ $(document).ready(function(){
         // jQuery Transition
         var header = $('#header');
         header.fadeOut('fast', function() {
-            $('#header').text(greeting[rand_num]);
+            $('#header').text(error[rand_num]);
             header.show(0, function() {
                 $('header').bigtext();
             });
