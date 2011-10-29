@@ -270,7 +270,7 @@ footer {
         margin-left: 0px;
         padding-left: 0px;
         margin: 0 auto;
-        width: 460px;
+        width: 600px;
 
         li {
             margin: 0 auto;
@@ -286,6 +286,8 @@ footer {
             -webkit-border-radius:5px;
             -moz-border-radius:5px;
             border-radius: 3px;
+            display: block;
+            height: 30px;
 
             -moz-transition-property: background-color, color;
             -o-transition-property: background-color, color;
@@ -309,9 +311,9 @@ footer {
 
         a.twitter {
             color: #66D9FF;
-            background: url('../img/twitter_newbird_blue-30.png') 0px -1px no-repeat;
-            padding-left: 30px;
-            padding-top: 3px;
+            background: url('../img/twitter.png') 1px 1px no-repeat;
+            padding-left: 35px;
+            padding-top: 1px;
             &:hover {
                 background-color: #66D9FF;
                 color: #fff;
@@ -320,9 +322,9 @@ footer {
 
         a.facebook {
             color: #3958C6;
-            background: url('../img/facebook-30.png') 0px 0px no-repeat;
-            padding-left: 30px;
-            padding-top: 3px;
+            background: url('../img/facebook.png') 1px 1px no-repeat;
+            padding-left: 35px;
+            padding-top: 1px;
             &:hover {
                 background-color: #3958C6;
                 color: #fff;
@@ -331,12 +333,24 @@ footer {
 
         a.flickr {
             color: #1F84FF;
-            background: url('../img/flickr-30.png') 0px -2px no-repeat;
+            background: url('../img/flickr.png') 1px 0px no-repeat;
             padding: 0px 5px 5px 5px;
-            padding-left: 30px;
-            padding-top: 3px;
+            padding-left: 35px;
+            padding-top: 2px;
             &:hover {
                 background-color: #1F84FF;
+                color: #fff;
+            }
+        }
+
+        a.github {
+            color: #222;
+            background: url('../img/github.png') -1px 2px no-repeat;
+            padding: 0px 5px 5px 5px;
+            padding-left: 35px;
+            padding-top: 2px;
+            &:hover {
+                background-color: #666;
                 color: #fff;
             }
         }
@@ -421,6 +435,21 @@ footer {
 
     footer ul {
         width: 125px !important;
+        a {
+            height: 25px;
+        }
+        a.twitter {
+            padding-top: 5px;
+        }
+        a.facebook {
+            padding-top: 5px;
+        }
+        a.flickr {
+            padding-top: 6px;
+        }
+        a.github {
+            padding-top: 6px;
+        }
     }
 }
 
@@ -438,7 +467,22 @@ footer {
     }
 
     footer ul {
-        width: 360px !important;
+        width: 475px !important;
+        a {
+            height: 24px;
+        }
+        a.twitter {
+            padding-top: 6px;
+        }
+        a.facebook {
+            padding-top: 6px;
+        }
+        a.flickr {
+            padding-top: 7px;
+        }
+        a.github {
+            padding-top: 7px;
+        }
     }
 
 }
