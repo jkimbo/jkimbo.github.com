@@ -74,7 +74,14 @@ $(document).ready(function(){
         if(old_rand_num_array.length > (error.length*0.7)){
             old_rand_num_array = old_rand_num_array.slice(1);
         }
-        $('#header').text(error[rand_num]);
+        // jQuery Transition
+        var header = $('#header');
+        header.fadeOut('fast', function() {
+            $('#header').text(greeting[rand_num]);
+            header.show(0, function() {
+                $('header').bigtext();
+            });
+        });
         $('header').bigtext();
         return false;
     });
